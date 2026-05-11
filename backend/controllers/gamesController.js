@@ -43,7 +43,10 @@ export async function getRoundsByGameId(req, res, next) {
     return res.status(404).json({ error: "Game not found" });
   }
   const rounds = game.rounds;
-  return res.json({ rounds: rounds });
+  return res.json({
+    rounds: rounds,
+    fields: ["type", "players", "against", "target", "tricks"],
+  });
 }
 
 export async function createRound(req, res, next) {
