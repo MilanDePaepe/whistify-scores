@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+
+echo "Running backend tests before push..."
+
+cd backend || exit 1
+
+npm test
