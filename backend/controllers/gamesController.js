@@ -1,23 +1,24 @@
-import { calculateScores } from "../calculators/calculateScores.js";
-import Game from "../models/game.js";
-import Round from "../models/round.js";
+const calculators = require("../calculators/calculateScores");
+const Game = require("../models/game");
+const Round = require("../models/round");
 
-export async function getGames(req, res, next) {
-  const games = await Game.find();
+exports.getGames = async (req, res, next) => {
+  return res.json({ games: [], fields: { players: { fields: ["name"] } } });
+  // const games = await Game.find();
 
-  return res.json({ games: games, fields: { players: ["name"] } });
-}
+  // return res.json({ games: games, fields: { players: ["name"] } });
+};
 
-export async function getGameById(req, res, next) {
+exports.getGameById = async (req, res, next) => {
   const gameId = req.params.id;
   const game = await Game.findById(gameId);
   if (!game) {
     return res.status(404).json({ error: "Game not found" });
   }
   return res.json({ game: game });
-}
+};
 
-export async function createGame(req, res, next) {
+exports.createGame = async (req, res, next) => {
   let players = req.body.players;
   if (!players) {
     return res.status(400).json({ error: "players are required" });
@@ -34,9 +35,9 @@ export async function createGame(req, res, next) {
   await game.save();
 
   return res.json({ game: game });
-}
+};
 
-export async function getRoundsByGameId(req, res, next) {
+exports.getRoundsByGameId = async (req, res, next) => {
   const gameId = req.params.id;
   const game = await Game.findById(gameId).populate("rounds");
   if (!game) {
@@ -47,16 +48,22 @@ export async function getRoundsByGameId(req, res, next) {
     rounds: rounds,
     fields: ["type", "players", "against", "target", "tricks"],
   });
-}
+};
 
-export async function createRound(req, res, next) {
+exports.createRound = async (req, res, next) => {
   const gameId = req.params.id;
   const type = req.body.type;
   const players = req.body.players;
   const against = req.body.against;
   const target = req.body.target;
   const tricks = req.body.tricks;
-  const scores = calculateScores(type, players, against, target, tricks);
+  const scores = calculators.calculateScores(
+    type,
+    players,
+    against,
+    target,
+    tricks,
+  );
 
   const game = await Game.findById(gameId);
   if (!game) {
@@ -75,7 +82,7 @@ export async function createRound(req, res, next) {
   game.rounds.push(round._id);
   await game.save();
   return res.json({ round: round });
-}
+};
 
 // round = {
 //   type: "SOLO",

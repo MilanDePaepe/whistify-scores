@@ -1,9 +1,11 @@
-import express, { json, urlencoded } from "express";
-import cookieParser from "cookie-parser";
-import logger from "morgan";
+const express = require("express");
+const { json, urlencoded } = express;
 
-import indexRouter from "./routes/index";
-import gameRouter from "./routes/game";
+const cookieParser = require("cookie-parser");
+const logger = require("morgan");
+
+const indexRouter = require("./routes/index");
+const gameRouter = require("./routes/game");
 
 var app = express();
 
@@ -15,4 +17,4 @@ app.use(cookieParser());
 app.use("/", indexRouter);
 app.use("/game", gameRouter);
 
-export default app;
+module.exports = app;

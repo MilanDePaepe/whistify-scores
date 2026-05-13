@@ -101,4 +101,4 @@ const scores = {
   },
 };
 
-export default scores;
+module.exports = scores;

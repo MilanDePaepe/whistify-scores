@@ -1,9 +1,4 @@
-export default function distributeScore(
-  players,
-  against,
-  playersScore,
-  againstScore,
-) {
+exports.distributeScore = (players, against, playersScore, againstScore) => {
   let result = {};
   players.forEach((player) => {
     result[player] = playersScore;
@@ -12,4 +7,4 @@ export default function distributeScore(
     result[player] = againstScore;
   });
   return result;
-}
+};
