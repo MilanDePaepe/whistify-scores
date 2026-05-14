@@ -73,12 +73,9 @@ exports.createRound = async (req, res, next) => {
     return res.status(404).json({ error: "Game not found" });
   }
 
+  const roundNumber = game.rounds.length + 1;
   const round = await Round.create({
-    type: type,
-    players: players,
-    against: against,
-    target: target,
-    tricks: tricks,
+    roundNumber: roundNumber,
     scores: scores,
   });
   await round.save();
