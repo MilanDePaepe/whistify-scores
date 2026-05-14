@@ -3,10 +3,9 @@ const Game = require("../models/game");
 const Round = require("../models/round");
 
 exports.getGames = async (req, res, next) => {
-  return res.json({ games: [], fields: { players: { fields: ["name"] } } });
-  // const games = await Game.find();
+  const games = await Game.find();
 
-  // return res.json({ games: games, fields: { players: ["name"] } });
+  return res.json({ games: games, fields: ["players", "name"] });
 };
 
 exports.getGameById = async (req, res, next) => {
