@@ -26,11 +26,11 @@ exports.createGame = async (req, res, next) => {
   if (!players) {
     return res.status(400).json({ error: "players are required" });
   }
-  if (players.lenght !== 4) {
+  if (players.length !== 4) {
     return res.status(400).json({ error: "There must be exactly 4 players" });
   }
 
-  players = players.map((index, player) => {
+  players = players.map((player, index) => {
     return { id: index, name: player };
   });
 
