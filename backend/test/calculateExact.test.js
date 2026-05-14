@@ -6,7 +6,12 @@ test("kleine miserie geslaagd", () => {
   const against = [1, 2, 3];
   const tricks = 0;
   const result = calculators.calculateExact(players, against, tricks, type);
-  expect(result).toStrictEqual({ 0: 18, 1: -6, 2: -6, 3: -6 });
+  expect(result).toStrictEqual([
+    { id: "0", score: 18 },
+    { id: "1", score: -6 },
+    { id: "2", score: -6 },
+    { id: "3", score: -6 },
+  ]);
 });
 
 test("kleine miserie gefaalt", () => {
@@ -15,7 +20,12 @@ test("kleine miserie gefaalt", () => {
   const against = [1, 2, 3];
   const tricks = 1;
   const result = calculators.calculateExact(players, against, tricks, type);
-  expect(result).toStrictEqual({ 0: -18, 1: 6, 2: 6, 3: 6 });
+  expect(result).toStrictEqual([
+    { id: "0", score: -18 },
+    { id: "1", score: 6 },
+    { id: "2", score: 6 },
+    { id: "3", score: 6 },
+  ]);
 });
 
 test("grote miserie geslaagd", () => {
@@ -24,7 +34,12 @@ test("grote miserie geslaagd", () => {
   const against = [1, 2, 3];
   const tricks = 0;
   const result = calculators.calculateExact(players, against, tricks, type);
-  expect(result).toStrictEqual({ 0: 36, 1: -12, 2: -12, 3: -12 });
+  expect(result).toStrictEqual([
+    { id: "0", score: 36 },
+    { id: "1", score: -12 },
+    { id: "2", score: -12 },
+    { id: "3", score: -12 },
+  ]);
 });
 
 test("grote miserie gefaalt", () => {
@@ -33,7 +48,12 @@ test("grote miserie gefaalt", () => {
   const against = [1, 2, 3];
   const tricks = 1;
   const result = calculators.calculateExact(players, against, tricks, type);
-  expect(result).toStrictEqual({ 0: -36, 1: 12, 2: 12, 3: 12 });
+  expect(result).toStrictEqual([
+    { id: "0", score: -36 },
+    { id: "1", score: 12 },
+    { id: "2", score: 12 },
+    { id: "3", score: 12 },
+  ]);
 });
 
 test("blote miserie geslaagd", () => {
@@ -42,7 +62,12 @@ test("blote miserie geslaagd", () => {
   const against = [1, 2, 3];
   const tricks = 0;
   const result = calculators.calculateExact(players, against, tricks, type);
-  expect(result).toStrictEqual({ 0: 60, 1: -20, 2: -20, 3: -20 });
+  expect(result).toStrictEqual([
+    { id: "0", score: 60 },
+    { id: "1", score: -20 },
+    { id: "2", score: -20 },
+    { id: "3", score: -20 },
+  ]);
 });
 
 test("blote miserie gefaalt", () => {
@@ -51,7 +76,12 @@ test("blote miserie gefaalt", () => {
   const against = [1, 2, 3];
   const tricks = 1;
   const result = calculators.calculateExact(players, against, tricks, type);
-  expect(result).toStrictEqual({ 0: -60, 1: 20, 2: 20, 3: 20 });
+  expect(result).toStrictEqual([
+    { id: "0", score: -60 },
+    { id: "1", score: 20 },
+    { id: "2", score: 20 },
+    { id: "3", score: 20 },
+  ]);
 });
 
 test("piccolo geslaagd", () => {
@@ -60,7 +90,12 @@ test("piccolo geslaagd", () => {
   const against = [1, 2, 3];
   const tricks = 1;
   const result = calculators.calculateExact(players, against, tricks, type);
-  expect(result).toStrictEqual({ 0: 24, 1: -8, 2: -8, 3: -8 });
+  expect(result).toStrictEqual([
+    { id: "0", score: 24 },
+    { id: "1", score: -8 },
+    { id: "2", score: -8 },
+    { id: "3", score: -8 },
+  ]);
 });
 
 test("piccolo gefaalt", () => {
@@ -69,7 +104,17 @@ test("piccolo gefaalt", () => {
   const against = [1, 2, 3];
   const tricks = 0;
   let result = calculators.calculateExact(players, against, tricks, type);
-  expect(result).toStrictEqual({ 0: -24, 1: 8, 2: 8, 3: 8 });
+  expect(result).toStrictEqual([
+    { id: "0", score: -24 },
+    { id: "1", score: 8 },
+    { id: "2", score: 8 },
+    { id: "3", score: 8 },
+  ]);
   result = calculators.calculateExact(players, against, 2, type);
-  expect(result).toStrictEqual({ 0: -24, 1: 8, 2: 8, 3: 8 });
+  expect(result).toStrictEqual([
+    { id: "0", score: -24 },
+    { id: "1", score: 8 },
+    { id: "2", score: 8 },
+    { id: "3", score: 8 },
+  ]);
 });

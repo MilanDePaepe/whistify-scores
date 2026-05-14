@@ -13,7 +13,12 @@ test("solo 5 geslaagd", () => {
     target,
     tricks,
   );
-  expect(result).toStrictEqual({ 0: 9, 1: -3, 2: -3, 3: -3 });
+  expect(result).toStrictEqual([
+    { id: "0", score: 9 },
+    { id: "1", score: -3 },
+    { id: "2", score: -3 },
+    { id: "3", score: -3 },
+  ]);
 });
 
 test("solo 5 gefaalt", () => {
@@ -29,7 +34,12 @@ test("solo 5 gefaalt", () => {
     target,
     tricks,
   );
-  expect(result).toStrictEqual({ 0: -9, 1: 3, 2: 3, 3: 3 });
+  expect(result).toStrictEqual([
+    { id: "0", score: -9 },
+    { id: "1", score: 3 },
+    { id: "2", score: 3 },
+    { id: "3", score: 3 },
+  ]);
 });
 
 test("solo 5 2 onderslagen", () => {
@@ -45,7 +55,12 @@ test("solo 5 2 onderslagen", () => {
     target,
     tricks,
   );
-  expect(result).toStrictEqual({ 0: -15, 1: 5, 2: 5, 3: 5 });
+  expect(result).toStrictEqual([
+    { id: "0", score: -15 },
+    { id: "1", score: 5 },
+    { id: "2", score: 5 },
+    { id: "3", score: 5 },
+  ]);
 });
 
 test("solo 5 2 overslagen", () => {
@@ -61,5 +76,10 @@ test("solo 5 2 overslagen", () => {
     target,
     tricks,
   );
-  expect(result).toStrictEqual({ 0: 15, 1: -5, 2: -5, 3: -5 });
+  expect(result).toStrictEqual([
+    { id: "0", score: 15 },
+    { id: "1", score: -5 },
+    { id: "2", score: -5 },
+    { id: "3", score: -5 },
+  ]);
 });
