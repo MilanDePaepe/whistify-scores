@@ -59,21 +59,6 @@ const scores = {
     standardScore: 13,
     puntenOnderslagen: 3,
   },
-  SOLO_11: {
-    standardScore: 16,
-    puntenOnderslagen: 3,
-    maxScore: 18,
-  },
-  SOLO_12: {
-    standardScore: 19,
-    puntenOnderslagen: 3,
-    maxScore: 18,
-  },
-  SOLO_13: {
-    standardScore: 30,
-    puntenOnderslagen: 3,
-    maxScore: 18,
-  },
   KLEINE_MISERIE: {
     standardScore: 18,
     goal: 0,

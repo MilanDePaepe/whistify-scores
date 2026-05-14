@@ -76,6 +76,11 @@ exports.createRound = async (req, res, next) => {
   const roundNumber = game.rounds.length + 1;
   const round = await Round.create({
     roundNumber: roundNumber,
+    type: type,
+    players: players,
+    against: against,
+    target: target,
+    tricks: tricks,
     scores: scores,
   });
   await round.save();

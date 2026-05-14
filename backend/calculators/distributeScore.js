@@ -6,5 +6,5 @@ exports.distributeScore = (players, against, playersScore, againstScore) => {
   against.forEach((player) => {
     result[player] = againstScore;
   });
-  return result;
+  return Object.entries(result).map(([id, score]) => ({ id, score }));
 };
