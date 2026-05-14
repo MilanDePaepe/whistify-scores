@@ -20,7 +20,7 @@ exports.calculateSamen = (players, against, target, tricks) => {
 
   if (tricks >= target) {
     // tricks >= target: use the score for the exact number of tricks
-    score = scores[`SAMEN_${tricks}`];
+    score = scores[`SAMEN_${tricks}`].standardScore;
   } else {
     score =
       scores[`SAMEN_${target}`].standardScore +
