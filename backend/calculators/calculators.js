@@ -39,6 +39,6 @@ exports.calculateExact = (players, against, tricks, type) => {
 
 exports.calculateTroel = (players, against, tricks, type) => {
   let score = scores[type].standardScore;
-  score = tricks > scores[type].goal ? score : -score;
+  score = tricks >= scores[type].goal ? score : -score;
   return distrubutor.distributeScore(players, against, score, -score);
 };

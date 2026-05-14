@@ -318,27 +318,27 @@ describe("PICCOLO", () => {
 
 describe("TROEL", () => {
   test("geslaagd (9 slagen > 8)", () => {
-    expect(calculateScores("TROEL", [0], [1, 2, 3], 0, 9)).toStrictEqual([
+    expect(calculateScores("TROEL", [0, 1], [2, 3], 0, 9)).toStrictEqual([
       { id: "0", score: 16 },
-      { id: "1", score: -16 },
+      { id: "1", score: 16 },
       { id: "2", score: -16 },
       { id: "3", score: -16 },
     ]);
   });
 
-  test("gefaald (8 slagen = goal)", () => {
-    expect(calculateScores("TROEL", [0], [1, 2, 3], 0, 8)).toStrictEqual([
-      { id: "0", score: -16 },
+  test("geslaagd (8 slagen = goal)", () => {
+    expect(calculateScores("TROEL", [0, 1], [2, 3], 0, 8)).toStrictEqual([
+      { id: "0", score: 16 },
       { id: "1", score: 16 },
-      { id: "2", score: 16 },
-      { id: "3", score: 16 },
+      { id: "2", score: -16 },
+      { id: "3", score: -16 },
     ]);
   });
 
   test("gefaald (7 slagen < goal)", () => {
-    expect(calculateScores("TROEL", [0], [1, 2, 3], 0, 7)).toStrictEqual([
+    expect(calculateScores("TROEL", [0, 1], [2, 3], 0, 7)).toStrictEqual([
       { id: "0", score: -16 },
-      { id: "1", score: 16 },
+      { id: "1", score: -16 },
       { id: "2", score: 16 },
       { id: "3", score: 16 },
     ]);
@@ -347,18 +347,27 @@ describe("TROEL", () => {
 
 describe("TROELA", () => {
   test("geslaagd (10 slagen > 9)", () => {
-    expect(calculateScores("TROELA", [0], [1, 2, 3], 0, 10)).toStrictEqual([
+    expect(calculateScores("TROELA", [0, 1], [2, 3], 0, 10)).toStrictEqual([
       { id: "0", score: 16 },
-      { id: "1", score: -16 },
+      { id: "1", score: 16 },
       { id: "2", score: -16 },
       { id: "3", score: -16 },
     ]);
   });
 
-  test("gefaald (9 slagen = goal)", () => {
-    expect(calculateScores("TROELA", [0], [1, 2, 3], 0, 9)).toStrictEqual([
-      { id: "0", score: -16 },
+  test("geslaagd (9 slagen = goal)", () => {
+    expect(calculateScores("TROELA", [0, 1], [2, 3], 0, 9)).toStrictEqual([
+      { id: "0", score: 16 },
       { id: "1", score: 16 },
+      { id: "2", score: -16 },
+      { id: "3", score: -16 },
+    ]);
+  });
+
+  test("gefaald (7 slagen < 9)", () => {
+    expect(calculateScores("TROELA", [0, 1], [2, 3], 0, 7)).toStrictEqual([
+      { id: "0", score: -16 },
+      { id: "1", score: -16 },
       { id: "2", score: 16 },
       { id: "3", score: 16 },
     ]);
