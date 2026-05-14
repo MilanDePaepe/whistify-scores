@@ -19,7 +19,11 @@ exports.getGameById = async (req, res, next) => {
 };
 
 exports.createGame = async (req, res, next) => {
-  let players = req.body.players;
+  const players = req.body.players;
+  const name = req.body.name;
+  if (!name) {
+    return res.status(400).json({ error: "name is required" });
+  }
   if (!players) {
     return res.status(400).json({ error: "players are required" });
   }
@@ -31,7 +35,7 @@ exports.createGame = async (req, res, next) => {
     return { id: index, name: player };
   });
 
-  const game = new Game({ players: players });
+  const game = new Game({ name: name, players: players });
   await game.save();
 
   return res.json({ game: game });
