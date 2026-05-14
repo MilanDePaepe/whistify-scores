@@ -18,7 +18,7 @@ exports.getGameById = async (req, res, next) => {
 };
 
 exports.createGame = async (req, res, next) => {
-  const players = req.body.players;
+  let players = req.body.players;
   const name = req.body.name;
   if (!name) {
     return res.status(400).json({ error: "name is required" });
