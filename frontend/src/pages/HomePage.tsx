@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { getGames } from '../api/client'
+import { getGames, deleteGame } from '../api/client'
 import type { Game } from '../types'
 import GameCard from '../components/GameCard'
 import CreateGameForm from '../components/CreateGameForm'
@@ -29,6 +29,16 @@ export default function HomePage() {
     navigate(`/game/${game._id}`)
   }
 
+  const handleDelete = async (id: string) => {
+    if (!window.confirm('Weet je zeker dat je dit spel wilt verwijderen?')) return
+    try {
+      await deleteGame(id)
+      fetchGames()
+    } catch {
+      /* empty */
+    }
+  }
+
   return (
     <div>
       <h1 className="mb-6 text-2xl font-bold text-zinc-100">Spellen</h1>
@@ -46,7 +56,7 @@ export default function HomePage() {
       ) : (
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {games.map((game) => (
-            <GameCard key={game._id} game={game} />
+            <GameCard key={game._id} game={game} onDelete={handleDelete} />
           ))}
         </div>
       )}
