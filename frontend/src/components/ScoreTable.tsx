@@ -11,10 +11,10 @@ export default function ScoreTable({ players, rounds }: Props) {
   players.forEach((p) => (totals[p.id] = 0))
 
   return (
-    <div className="overflow-x-auto rounded-lg border border-zinc-800">
+    <div className="overflow-auto rounded-lg border border-zinc-800 max-h-[600px]">
       <table className="w-full text-left text-sm">
-        <thead>
-          <tr className="border-b border-zinc-800 bg-zinc-900">
+        <thead className="sticky top-0 z-10 bg-zinc-900">
+          <tr className="border-b border-zinc-800">
             <th className="px-4 py-3 font-medium text-zinc-500">#</th>
             {players.map((p) => (
               <th key={p.id} className="px-4 py-3 font-medium text-zinc-300">
@@ -71,8 +71,8 @@ export default function ScoreTable({ players, rounds }: Props) {
           )}
         </tbody>
         {rounds.length > 0 && (
-          <tfoot>
-            <tr className="border-t-2 border-zinc-700 bg-zinc-900 font-semibold">
+          <tfoot className="sticky bottom-0 z-10 bg-zinc-900">
+            <tr className="border-t-2 border-zinc-700 font-semibold">
               <td className="px-4 py-3 text-zinc-400">Totaal</td>
               {players.map((p) => {
                 const t = totals[p.id]
