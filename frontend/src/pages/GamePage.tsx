@@ -3,6 +3,7 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import { getGame, getRounds, deleteGame } from "../api/client";
 import type { Game, Round } from "../types";
 import ScoreTable from "../components/ScoreTable";
+import ScoreChart from "../components/ScoreChart";
 import AddRoundForm from "../components/AddRoundForm";
 
 export default function GamePage() {
@@ -88,6 +89,10 @@ export default function GamePage() {
 
       <div className="mb-8">
         <ScoreTable players={game.players} rounds={rounds} />
+      </div>
+
+      <div className="mb-8">
+        <ScoreChart players={game.players} rounds={rounds} />
       </div>
     </div>
   );
