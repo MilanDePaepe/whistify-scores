@@ -10,6 +10,7 @@ interface Props {
 }
 
 export default function AddRoundForm({ players, gameId, onRoundAdded }: Props) {
+  const [dealer, setDealer] = useState(0);
   const [type, setType] = useState<GameType>("SOLO");
   const [selectedIdx, setSelectedIdx] = useState<number[]>([]);
   const [target, setTarget] = useState(5);
@@ -74,6 +75,7 @@ export default function AddRoundForm({ players, gameId, onRoundAdded }: Props) {
     setBusy(true);
     try {
       const { round } = await createRound(gameId, {
+        dealer,
         type,
         players: selectedIdx,
         against,
@@ -101,6 +103,26 @@ export default function AddRoundForm({ players, gameId, onRoundAdded }: Props) {
       <h2 className="mb-4 text-lg font-semibold text-zinc-100">
         Ronde toevoegen
       </h2>
+
+      <div className="mb-4">
+        <label className="mb-1.5 block text-sm text-zinc-400">Deler</label>
+        <div className="flex gap-2">
+          {players.map((p, i) => (
+            <button
+              key={p.id}
+              type="button"
+              onClick={() => setDealer(i)}
+              className={`rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
+                dealer === i
+                  ? "bg-amber-600 text-white"
+                  : "border border-zinc-700 bg-zinc-800 text-zinc-400 hover:border-zinc-600 hover:text-zinc-200"
+              }`}
+            >
+              {p.name}
+            </button>
+          ))}
+        </div>
+      </div>
 
       <div className="mb-4">
         <label className="mb-1.5 block text-sm text-zinc-400">Type</label>

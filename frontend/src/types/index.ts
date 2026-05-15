@@ -18,6 +18,7 @@ export interface RoundScore {
 export interface Round {
   _id: string
   roundNumber?: number
+  dealer?: number
   type?: string
   players?: number[]
   against?: number[]
@@ -33,6 +34,7 @@ export interface CreateGamePayload {
 }
 
 export interface CreateRoundPayload {
+  dealer: number
   type: string
   players: number[]
   against: number[]

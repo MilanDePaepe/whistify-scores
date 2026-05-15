@@ -34,6 +34,11 @@ export async function getRounds(id: string): Promise<{ rounds: Round[]; fields: 
   return handleResponse(res)
 }
 
+export async function deleteGame(id: string): Promise<{ message: string }> {
+  const res = await fetch(`${BASE}/game/${id}`, { method: 'DELETE' })
+  return handleResponse(res)
+}
+
 export async function createRound(
   id: string,
   data: CreateRoundPayload,

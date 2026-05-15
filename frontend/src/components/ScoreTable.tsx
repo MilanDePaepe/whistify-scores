@@ -47,12 +47,17 @@ export default function ScoreTable({ players, rounds }: Props) {
                   className="border-b border-zinc-800/50 transition-colors hover:bg-zinc-800/30"
                 >
                   <td className="px-4 py-3 text-zinc-500">{roundLabel}</td>
-                  {players.map((p) => {
+                  {players.map((p, idx) => {
                     const score = getScoreForPlayer(round.scores, p.id)
+                    const isDealer = round.dealer === idx
                     return (
                       <td
                         key={p.id}
                         className={`px-4 py-3 tabular-nums ${
+                          isDealer
+                            ? 'underline underline-offset-4 decoration-amber-500 decoration-2'
+                            : ''
+                        } ${
                           score > 0
                             ? 'text-emerald-400'
                             : score < 0
