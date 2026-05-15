@@ -88,9 +88,13 @@ export function needsTarget(type: GameType) {
 }
 
 export function getTargetRange(type: GameType): [number, number] {
-  if (isSoloType(type)) return [5, 13]
-  if (isSamenType(type)) return [8, 10]
-  return [0, 0]
+  switch (type) {
+    case 'SOLO':        return [5, 8]
+    case 'SAMEN':       return [8, 13]
+    case 'ABONDANCE':   return [9, 12]
+    case 'SOLO_SLIM':   return [13, 13]
+    default:            return [0, 0]
+  }
 }
 
 export function getScoreForPlayer(scores: Round['scores'], playerId: number | string): number {
