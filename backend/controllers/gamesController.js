@@ -49,13 +49,14 @@ exports.getRoundsByGameId = async (req, res, next) => {
   const rounds = game.rounds;
   return res.json({
     rounds: rounds,
-    fields: ["type", "players", "against", "target", "tricks"],
+    fields: ["type", "dealer", "players", "against", "target", "tricks"],
   });
 };
 
 exports.createRound = async (req, res, next) => {
   const gameId = req.params.id;
   const type = req.body.type;
+  const dealer = req.body.dealer;
   const players = req.body.players;
   const against = req.body.against;
   const target = req.body.target;
@@ -77,6 +78,7 @@ exports.createRound = async (req, res, next) => {
   const round = await Round.create({
     roundNumber: roundNumber,
     type: type,
+    dealer: dealer,
     players: players,
     against: against,
     target: target,
@@ -89,10 +91,13 @@ exports.createRound = async (req, res, next) => {
   return res.json({ round: round });
 };
 
-// round = {
-//   type: "SOLO",
-//   players: [0],
-//   against: [1, 2, 3],
-//   target: 5,
-//   tricks: 5,
-// };
+exports.deleteGame = async (req, res, next) => {
+  const gameId = req.params.id;
+  const game = await Game.findById(gameId);
+  if (!game) {
+    return res.status(404).json({ error: "Game not found" });
+  }
+  await Round.deleteMany({ _id: { $in: game.rounds } });
+  await Game.findByIdAndDelete(gameId);
+  return res.json({ message: "Game deleted" });
+};

@@ -8,6 +8,7 @@ const scoreSchema = new mongoose.Schema({
 const roundSchema = new mongoose.Schema({
   roundNumber: Number,
   type: String,
+  dealer: Number,
   players: [Number],
   against: [Number],
   target: Number,
