@@ -14,6 +14,6 @@ router.post("/:id/rounds", controller.createRound);
 
 router.get("/:id", controller.getGameById);
 
-// router.delete("/:id", controller.deleteGame);
+router.delete("/:id", controller.deleteGame);
 
 module.exports = router;
