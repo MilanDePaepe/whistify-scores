@@ -15,7 +15,8 @@ export default function ScoreTable({ players, rounds }: Props) {
       <table className="w-full text-left text-sm">
         <thead className="sticky top-0 z-10 bg-zinc-900">
           <tr className="border-b border-zinc-800">
-            <th className="px-4 py-3 font-medium text-zinc-500">#</th>
+            <th className="w-12 px-4 py-3 font-medium text-zinc-500">Ronde</th>
+            <th className="px-4 py-3 font-medium text-zinc-500">Type</th>
             {players.map((p) => (
               <th key={p.id} className="px-4 py-3 font-medium text-zinc-300">
                 {p.name}
@@ -27,7 +28,7 @@ export default function ScoreTable({ players, rounds }: Props) {
           {rounds.length === 0 ? (
             <tr>
               <td
-                colSpan={players.length + 1}
+                colSpan={players.length + 2}
                 className="px-4 py-12 text-center text-zinc-500"
               >
                 Nog geen rondes. Voeg de eerste ronde toe!
@@ -38,15 +39,14 @@ export default function ScoreTable({ players, rounds }: Props) {
               players.forEach((p) => {
                 totals[p.id] += getScoreForPlayer(round.scores, p.id)
               })
-              const roundLabel =
-                round.type || `Ronde ${round.roundNumber ?? ri + 1}`
 
               return (
                 <tr
                   key={round._id}
                   className="border-b border-zinc-800/50 transition-colors hover:bg-zinc-800/30"
                 >
-                  <td className="px-4 py-3 text-zinc-500">{roundLabel}</td>
+                  <td className="px-4 py-3 text-zinc-500">{ri + 1}</td>
+                  <td className="px-4 py-3 text-zinc-400">{round.type || '-'}</td>
                   {players.map((p, idx) => {
                     const score = getScoreForPlayer(round.scores, p.id)
                     const isDealer = round.dealer === idx
@@ -78,7 +78,7 @@ export default function ScoreTable({ players, rounds }: Props) {
         {rounds.length > 0 && (
           <tfoot className="sticky bottom-0 z-10 bg-zinc-900">
             <tr className="border-t-2 border-zinc-700 font-semibold">
-              <td className="px-4 py-3 text-zinc-400">Totaal</td>
+              <td colSpan={2} className="px-4 py-3 text-zinc-400">Totaal</td>
               {players.map((p) => {
                 const t = totals[p.id]
                 return (

@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, lazy, Suspense } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { getGame, getRounds, deleteGame } from "../api/client";
 import type { Game, Round } from "../types";
 import ScoreTable from "../components/ScoreTable";
-import ScoreChart from "../components/ScoreChart";
 import AddRoundForm from "../components/AddRoundForm";
+
+const ScoreChart = lazy(() => import("../components/ScoreChart"));
 
 export default function GamePage() {
   const { id } = useParams<{ id: string }>();
@@ -92,7 +93,9 @@ export default function GamePage() {
       </div>
 
       <div className="mb-8">
-        <ScoreChart players={game.players} rounds={rounds} />
+        <Suspense fallback={<div className="h-[370px] animate-pulse rounded-lg border border-zinc-800 bg-zinc-900 p-6" />}>
+          <ScoreChart players={game.players} rounds={rounds} />
+        </Suspense>
       </div>
     </div>
   );
