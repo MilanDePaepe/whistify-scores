@@ -42,7 +42,7 @@ export default function ScoresHistory({ players, rounds }: Props) {
 
   return (
     <div>
-      <div>
+      <div className="flex gap-2">
         <button
           key="table"
           type="button"

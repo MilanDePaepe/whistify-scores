@@ -8,6 +8,11 @@ export default function Layout() {
           <Link to="/" className="text-lg font-semibold tracking-tight text-amber-500 hover:text-amber-400">
             Whistify Scores
           </Link>
+          <nav className="flex items-center gap-4">
+            <Link to="/regels" className="text-sm text-zinc-500 hover:text-zinc-300">
+              Regels
+            </Link>
+          </nav>
         </div>
       </header>
       <main className="mx-auto max-w-5xl px-4 py-6">
