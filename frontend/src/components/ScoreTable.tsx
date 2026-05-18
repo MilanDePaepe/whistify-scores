@@ -1,17 +1,17 @@
-import type { Player, Round } from '../types'
-import { getScoreForPlayer } from '../types'
+import type { Player, Round } from "../types";
+import { getScoreForPlayer } from "../types";
 
 interface Props {
-  players: Player[]
-  rounds: Round[]
+  players: Player[];
+  rounds: Round[];
 }
 
 export default function ScoreTable({ players, rounds }: Props) {
-  const totals: Record<string, number> = {}
-  players.forEach((p) => (totals[p.id] = 0))
+  const totals: Record<string, number> = {};
+  players.forEach((p) => (totals[p.id] = 0));
 
   return (
-    <div className="overflow-auto rounded-lg border border-zinc-800 max-h-[600px]">
+    <div className="overflow-auto rounded-lg border border-zinc-800 max-h-150">
       <table className="w-full text-left text-sm">
         <thead className="sticky top-0 z-10 bg-zinc-900">
           <tr className="border-b border-zinc-800">
@@ -37,8 +37,8 @@ export default function ScoreTable({ players, rounds }: Props) {
           ) : (
             rounds.map((round, ri) => {
               players.forEach((p) => {
-                totals[p.id] += getScoreForPlayer(round.scores, p.id)
-              })
+                totals[p.id] += getScoreForPlayer(round.scores, p.id);
+              });
 
               return (
                 <tr
@@ -46,61 +46,65 @@ export default function ScoreTable({ players, rounds }: Props) {
                   className="border-b border-zinc-800/50 transition-colors hover:bg-zinc-800/30"
                 >
                   <td className="px-4 py-3 text-zinc-500">{ri + 1}</td>
-                  <td className="px-4 py-3 text-zinc-400">{round.type || '-'}</td>
+                  <td className="px-4 py-3 text-zinc-400">
+                    {round.type || "-"}
+                  </td>
                   {players.map((p, idx) => {
-                    const score = getScoreForPlayer(round.scores, p.id)
-                    const isDealer = round.dealer === idx
+                    const score = getScoreForPlayer(round.scores, p.id);
+                    const isDealer = round.dealer === idx;
                     return (
                       <td
                         key={p.id}
                         className={`px-4 py-3 tabular-nums ${
                           isDealer
-                            ? 'underline underline-offset-4 decoration-amber-500 decoration-2'
-                            : ''
+                            ? "underline underline-offset-4 decoration-amber-500 decoration-2"
+                            : ""
                         } ${
                           score > 0
-                            ? 'text-emerald-400'
+                            ? "text-emerald-400"
                             : score < 0
-                              ? 'text-red-400'
-                              : 'text-zinc-400'
+                              ? "text-red-400"
+                              : "text-zinc-400"
                         }`}
                       >
-                        {score > 0 ? '+' : ''}
+                        {score > 0 ? "+" : ""}
                         {score}
                       </td>
-                    )
+                    );
                   })}
                 </tr>
-              )
+              );
             })
           )}
         </tbody>
         {rounds.length > 0 && (
           <tfoot className="sticky bottom-0 z-10 bg-zinc-900">
             <tr className="border-t-2 border-zinc-700 font-semibold">
-              <td colSpan={2} className="px-4 py-3 text-zinc-400">Totaal</td>
+              <td colSpan={2} className="px-4 py-3 text-zinc-400">
+                Totaal
+              </td>
               {players.map((p) => {
-                const t = totals[p.id]
+                const t = totals[p.id];
                 return (
                   <td
                     key={p.id}
                     className={`px-4 py-3 tabular-nums ${
                       t > 0
-                        ? 'text-emerald-400'
+                        ? "text-emerald-400"
                         : t < 0
-                          ? 'text-red-400'
-                          : 'text-zinc-300'
+                          ? "text-red-400"
+                          : "text-zinc-300"
                     }`}
                   >
-                    {t > 0 ? '+' : ''}
+                    {t > 0 ? "+" : ""}
                     {t}
                   </td>
-                )
+                );
               })}
             </tr>
           </tfoot>
         )}
       </table>
     </div>
-  )
+  );
 }

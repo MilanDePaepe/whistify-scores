@@ -1,11 +1,9 @@
-import { useEffect, useState, lazy, Suspense } from "react";
+import { useEffect, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { getGame, getRounds, deleteGame } from "../api/client";
 import type { Game, Round } from "../types";
-import ScoreTable from "../components/ScoreTable";
 import AddRoundForm from "../components/AddRoundForm";
-
-const ScoreChart = lazy(() => import("../components/ScoreChart"));
+import ScoresHistory from "../components/ScoresHistory";
 
 export default function GamePage() {
   const { id } = useParams<{ id: string }>();
@@ -35,7 +33,8 @@ export default function GamePage() {
   const navigate = useNavigate();
 
   const handleDelete = async () => {
-    if (!window.confirm("Weet je zeker dat je dit spel wilt verwijderen?")) return;
+    if (!window.confirm("Weet je zeker dat je dit spel wilt verwijderen?"))
+      return;
     try {
       await deleteGame(id!);
       navigate("/");
@@ -88,15 +87,7 @@ export default function GamePage() {
       />
       <br />
 
-      <div className="mb-8">
-        <ScoreTable players={game.players} rounds={rounds} />
-      </div>
-
-      <div className="mb-8">
-        <Suspense fallback={<div className="h-[370px] animate-pulse rounded-lg border border-zinc-800 bg-zinc-900 p-6" />}>
-          <ScoreChart players={game.players} rounds={rounds} />
-        </Suspense>
-      </div>
+      <ScoresHistory players={game.players} rounds={rounds} />
     </div>
   );
 }
