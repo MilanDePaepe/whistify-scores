@@ -1,15 +1,27 @@
-import { Link, Outlet } from 'react-router-dom'
+import { Link, Outlet } from "react-router-dom";
 
 export default function Layout() {
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-100">
       <header className="sticky top-0 z-10 border-b border-zinc-800 bg-zinc-950/80 backdrop-blur-sm">
         <div className="mx-auto flex h-14 max-w-5xl items-center justify-between px-4">
-          <Link to="/" className="text-lg font-semibold tracking-tight text-amber-500 hover:text-amber-400">
+          <Link
+            to="/"
+            className="text-lg font-semibold tracking-tight text-amber-500 hover:text-amber-400"
+          >
             Whistify Scores
           </Link>
           <nav className="flex items-center gap-4">
-            <Link to="/regels" className="text-sm text-zinc-500 hover:text-zinc-300">
+            <Link
+              to="/games"
+              className="text-sm text-zinc-500 hover:text-zinc-300"
+            >
+              Games
+            </Link>
+            <Link
+              to="/regels"
+              className="text-sm text-zinc-500 hover:text-zinc-300"
+            >
               Regels
             </Link>
           </nav>
@@ -19,5 +31,5 @@ export default function Layout() {
         <Outlet />
       </main>
     </div>
-  )
+  );
 }

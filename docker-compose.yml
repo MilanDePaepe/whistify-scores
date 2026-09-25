@@ -23,7 +23,7 @@ services:
     depends_on:
       - backend
     environment:
-      - ALLOWED_HOSTS=milandp.be
+      - ALLOWED_HOSTS=milandp.be,localhost,127.0.0.1
     ports:
       - "4173:4173"
 

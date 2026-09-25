@@ -10,7 +10,7 @@ export default defineConfig(({ mode }) => {
     server: {
       proxy: {
         "/api": {
-          target: "http://localhost:3000",
+          target: "https://whistify-scores-api.milandp.be",
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/api/, ""),
         },

@@ -42,3 +42,8 @@ exports.calculateTroel = (players, against, tricks, type) => {
   score = tricks >= scores[type].goal ? score : -score;
   return distrubutor.distributeScore(players, against, score, -score);
 };
+
+exports.calculateFout = (players, against) => {
+  let score = scores["FOUT"].standardScore;
+  return distrubutor.distributeScore(players, against, score, -score/3);
+}

@@ -48,6 +48,8 @@ exports.calculateScores = (type, players, against, target, tricks) => {
     case "SOLO_SLIM":
       scores = calculators.calculateSolo(players, against, target, tricks);
       break;
+    case "FOUT":
+      scores = calculators.calculateFout(players, against);
     default:
       break;
   }

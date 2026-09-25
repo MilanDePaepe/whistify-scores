@@ -53,6 +53,7 @@ export type GameType =
   | 'PICCOLO'
   | 'TROEL'
   | 'TROELA'
+  | 'FOUT'
 
 export const ROUND_TYPES: { value: GameType; label: string }[] = [
   { value: 'SOLO', label: 'Solo' },
@@ -65,6 +66,7 @@ export const ROUND_TYPES: { value: GameType; label: string }[] = [
   { value: 'PICCOLO', label: 'Piccolo' },
   { value: 'TROEL', label: 'Troel' },
   { value: 'TROELA', label: 'Troela' },
+  { value: 'FOUT', label: 'Fout'},
 ]
 
 export function isSoloType(type: GameType) {

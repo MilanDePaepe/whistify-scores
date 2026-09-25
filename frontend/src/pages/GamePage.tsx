@@ -1,30 +1,19 @@
-import { useEffect, useState } from "react";
-import { useParams, Link, useNavigate } from "react-router-dom";
-import { getGame, getRounds, deleteGame } from "../api/client";
+import { useState } from "react";
+import { useLoaderData, Link, useNavigate } from "react-router-dom";
+import { deleteGame } from "../api/client";
 import type { Game, Round } from "../types";
 import AddRoundForm from "../components/AddRoundForm";
 import ScoresHistory from "../components/ScoresHistory";
 
 export default function GamePage() {
-  const { id } = useParams<{ id: string }>();
-  const [game, setGame] = useState<Game | null>(null);
-  const [rounds, setRounds] = useState<Round[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
-
-  useEffect(() => {
-    if (!id) return;
-    setLoading(true);
-    Promise.all([getGame(id), getRounds(id)])
-      .then(([gameData, roundsData]) => {
-        setGame(gameData.game);
-        setRounds(roundsData.rounds);
-      })
-      .catch((err) =>
-        setError(err instanceof Error ? err.message : "Fout bij laden"),
-      )
-      .finally(() => setLoading(false));
-  }, [id]);
+  const initialData = useLoaderData() as {
+    game: Game | null;
+    rounds: Round[];
+    error?: string;
+  };
+  const [game] = useState<Game | null>(initialData.game);
+  const [rounds, setRounds] = useState<Round[]>(initialData.rounds);
+  const [error, setError] = useState(initialData.error || "");
 
   const handleRoundAdded = (round: Round) => {
     setRounds((prev) => [...prev, round]);
@@ -36,16 +25,12 @@ export default function GamePage() {
     if (!window.confirm("Weet je zeker dat je dit spel wilt verwijderen?"))
       return;
     try {
-      await deleteGame(id!);
+      await deleteGame(game!._id);
       navigate("/");
     } catch (err) {
       setError(err instanceof Error ? err.message : "Fout bij verwijderen");
     }
   };
-
-  if (loading) {
-    return <p className="text-sm text-zinc-500">Laden...</p>;
-  }
 
   if (error || !game) {
     return (

@@ -84,6 +84,9 @@ const scores = {
     standardScore: 16,
     goal: 9,
   },
+  FOUT: {
+    standardScore: -15,
+  }
 };
 
 module.exports = scores;
